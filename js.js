@@ -4,6 +4,8 @@ var arrayDiv= new Array();
 
 function getTask()
 {
+
+	var parent = document.getElementById('myContainer');
 	var newCheckbox = document.createElement('input');
 	
 		newCheckbox.id = 'check'+valueId;
@@ -13,6 +15,7 @@ function getTask()
 
     var newDiv = document.createElement('div');
 	
+		
 		newDiv.id = 'get_task'+valueId;
 		newDiv.className = 'get_task';
 		
@@ -21,9 +24,11 @@ function getTask()
 	newDiv.appendChild(document.createTextNode(document.getElementById('task').value));
 	
 	document.getElementById('task').value='';
+	parent.appendChild(newCheckbox);
+	parent.appendChild(newDiv);
 	
-	document.body.appendChild(newCheckbox);
-	document.body.appendChild(newDiv);	
+	/*document.body.appendChild(newCheckbox);
+	document.body.appendChild(newDiv);	*/
 	
 	document.getElementById('check'+valueId).addEventListener("click", isChecked,false);
 
