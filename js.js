@@ -1,6 +1,7 @@
 var valueId=0;
 
 var arrayDiv= new Array();
+
 function getTask()
 {
 	var newCheckbox = document.createElement('input');
@@ -78,3 +79,48 @@ function isCheckedAll()
 	}
 }
 
+
+function active()
+{
+	for (var i=0;i<arrayDiv.push();i++)
+	{
+		if(document.getElementById('check'+i).checked)
+			{
+				document.getElementById('get_task'+i).style.display='none';
+				document.getElementById('check'+i).style.display='none';
+			}
+		else
+			{
+				document.getElementById('get_task'+i).style.display='block';
+				document.getElementById('check'+i).style.display='block';
+			}
+	}
+}
+
+function completed()
+{
+	for (var i=0;i<arrayDiv.push();i++)
+	{
+		if(!document.getElementById('check'+i).checked)
+			{
+				document.getElementById('get_task'+i).style.display='none';
+				document.getElementById('check'+i).style.display='none';
+			}
+		else
+			{
+				document.getElementById('get_task'+i).style.display='block';
+				document.getElementById('check'+i).style.display='block';
+			}
+		
+	}
+}
+
+
+function allTask()
+{
+	for (var i=0;i<arrayDiv.push();i++)
+	{
+		document.getElementById('get_task'+i).style.display='block';
+		document.getElementById('check'+i).style.display='block';
+	}
+}
