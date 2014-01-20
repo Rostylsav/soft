@@ -83,12 +83,16 @@ a{
 	color: #999;
 	font-size: 18px;
 	font-weight: bold;
+	padding-right:10px;
 }
 a.active{
 	color: #222;
 }
 
 
+#name_program{
+	
+}
 /*
 #check:checked ~ #get_task {
   text-decoration: line-through;

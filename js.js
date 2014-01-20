@@ -1,6 +1,6 @@
 var valueId=0;
-
 var arrayDiv= new Array();
+var numberOfTasks=0;
 
 function getTask()
 {
@@ -33,6 +33,7 @@ function getTask()
 	document.getElementById('check'+valueId).addEventListener("click", isChecked,false);
 
 	valueId++;
+	numberOfTasks++;
 }
 
 function isChecked()
@@ -52,6 +53,7 @@ function isChecked()
 				document.getElementById('get_task'+i).style.color ='#111';
 			}
 		}
+		numberOfTasks--;
 }
 
 function isCheckedAll()
@@ -129,3 +131,35 @@ function allTask()
 		document.getElementById('check'+i).style.display='block';
 	}
 }
+
+var parent = document.getElementById('numberOfTasks');
+var newDivTask = document.createElement('div');
+	newDivTask.appendChild(numberOfTasks);
+	parent.appendChild(newDivTask);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
