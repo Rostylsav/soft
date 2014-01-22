@@ -1,86 +1,76 @@
 var valueId=0;
-var arrayDiv= new Array();
 var numberOfTasks=0;
 
 function getTask()
 {
-
-	var parent = document.getElementById('myContainer');
-	var newCheckbox = document.createElement('input');
+	var containerTask = document.getElementById('myContainer');
 	
+	var newCheckbox = document.createElement('input');
 		newCheckbox.id = 'check'+valueId;
 		newCheckbox.className = 'check';
 		newCheckbox.type='checkbox';
-		
 
     var newDiv = document.createElement('div');
-	
-		
 		newDiv.id = 'get_task'+valueId;
 		newDiv.className = 'get_task';
 		
-	arrayDiv.push(document.getElementById('task').value);
-
+	var container = document.createElement('div');
+		container.id = 'container'+valueId;
+	
 	newDiv.appendChild(document.createTextNode(document.getElementById('task').value));
 	
 	document.getElementById('task').value='';
-	parent.appendChild(newCheckbox);
-	parent.appendChild(newDiv);
 	
-	/*document.body.appendChild(newCheckbox);
-	document.body.appendChild(newDiv);	*/
+	container.appendChild(newCheckbox);
+	container.appendChild(newDiv);
+	containerTask.appendChild(container);
+
 	
 	document.getElementById('check'+valueId).addEventListener("click", isChecked,false);
 
 	valueId++;
-	numberOfTasks++;
+	addNumberOfTask();
 }
 
-function isChecked()
+function isChecked(e)
 {	
-	for(var i=0; i<arrayDiv.push(); i++ )
+	var CheckTarget = e.target;
+	if(CheckTarget.checked)
 		{
-			if(document.getElementById('check'+i).checked)
-			{
-				document.getElementById('get_task'+i).style.textDecoration ='line-through';
-				document.getElementById('get_task'+i).style.color ='#999';
-				
-			}
-			else
-			{
-				document.getElementById('check'+i).style.color ='#999';
-				document.getElementById('get_task'+i).style.textDecoration ='none';
-				document.getElementById('get_task'+i).style.color ='#111';
-			}
+			CheckTarget.parentNode.className='isChecked';	
+			delNumberOfTask();
 		}
-		numberOfTasks--;
+	else
+		{
+			CheckTarget.parentNode.className='isntCheck';
+			addNumberOfTask();
+		}	
 }
 
-function isCheckedAll()
+function isCheckedAll(e)
 {	
-	if(document.getElementById('check_all').checked)
+	var CheckTarget = e.target;
+	if(CheckTarget.checked)
 	{
-		for(var i=0; i<arrayDiv.push(); i++ )
+		numberOfTask();
+		for(var i=0; i<valueId; i++ )
 		{
-				document.getElementById('check'+i).style.color ='#ff0000';
-				document.getElementById('get_task'+i).style.textDecoration ='line-through';
-				document.getElementById('get_task'+i).style.color ='#999';
+				
+				document.getElementById('container'+i).className='isChecked';
 		}
 	}
 	else
 	{
-		for(var i=0; i<arrayDiv.push(); i++ )
+		numberOfTaskAll();
+		for(var i=0; i<valueId; i++ )
 		{
 			if(document.getElementById('check'+i).checked)
 			{
-				document.getElementById('get_task'+i).style.textDecoration ='line-through';
-				document.getElementById('get_task'+i).style.color ='#999';
+				document.getElementById('container'+i).className='isChecked';
 			}
 			else
 			{
-				document.getElementById('check'+i).style.color ='#999';
-				document.getElementById('get_task'+i).style.textDecoration ='none';
-				document.getElementById('get_task'+i).style.color ='#111';
+				document.getElementById('container'+i).className='isntChecked';
 			}
 		}
 	}
@@ -89,7 +79,7 @@ function isCheckedAll()
 
 function active()
 {
-	for (var i=0;i<arrayDiv.push();i++)
+	for (var i=0;i<valueId;i++)
 	{
 		if(document.getElementById('check'+i).checked)
 			{
@@ -106,7 +96,7 @@ function active()
 
 function completed()
 {
-	for (var i=0;i<arrayDiv.push();i++)
+	for (var i=0;i<valueId;i++)
 	{
 		if(!document.getElementById('check'+i).checked)
 			{
@@ -125,18 +115,42 @@ function completed()
 
 function allTask()
 {
-	for (var i=0;i<arrayDiv.push();i++)
+	for (var i=0;i<valueId;i++)
 	{
 		document.getElementById('get_task'+i).style.display='block';
 		document.getElementById('check'+i).style.display='block';
 	}
 }
 
-var parent = document.getElementById('numberOfTasks');
-var newDivTask = document.createElement('div');
-	newDivTask.appendChild(numberOfTasks);
-	parent.appendChild(newDivTask);
+
+
+function init(){
 	
+	document.getElementById('check_all').addEventListener("click", isCheckedAll,false);
+	numberOfTask();
+}
+
+function numberOfTask(){
+	var parent2 = document.getElementById('myContainer2');
+	parent2.innerHTML='Tasks to do: 0';
+}
+
+function numberOfTaskAll(){
+	var parent2 = document.getElementById('myContainer2');
+	parent2.innerHTML='Tasks to do: '+numberOfTasks;
+} 
+
+function addNumberOfTask(){
+	numberOfTasks++;
+	var parent2 = document.getElementById('myContainer2');
+	parent2.innerHTML='Tasks to do: '+numberOfTasks;
+}
+
+function delNumberOfTask(){
+	numberOfTasks--;
+	var parent2 = document.getElementById('myContainer2');
+	parent2.innerHTML='Tasks to do:  '+numberOfTasks;
+}
 	
 	
 	

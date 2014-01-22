@@ -31,6 +31,9 @@ body{
 .check:checked:before {
 	color: #FF0000;
 }
+.checkCheckbox{
+	color: #FF0000;
+}
 
 .get_task{
 	background :#FFFAFA; 
@@ -90,8 +93,24 @@ a.active{
 }
 
 
-#name_program{
-	
+.activ{
+	display:none;
+}
+.noactiv{
+	display:block;
+}
+
+.isChecked{
+	text-decoration :line-through;
+	color:#999;
+}
+.isntCheck{
+	color:#111;
+	text-decoration:none;
+}
+#myContainer2{
+	float: left;
+padding-left: 20px;
 }
 /*
 #check:checked ~ #get_task {
