@@ -1,6 +1,10 @@
 var valueId=0;
 var numberOfTasks=0;
 
+function ifPressEnter(){
+	if (event.keyCode == 13){getTask()}
+}
+
 function getTask()
 {
 	var containerTask = document.getElementById('myContainer');
@@ -55,8 +59,8 @@ function isCheckedAll(e)
 		numberOfTask();
 		for(var i=0; i<valueId; i++ )
 		{
-				
-				document.getElementById('container'+i).className='isChecked';
+			document.getElementById('container'+i).className='isChecked';
+			document.getElementById('check'+i).className = 'check checkColor';
 		}
 	}
 	else
@@ -67,10 +71,12 @@ function isCheckedAll(e)
 			if(document.getElementById('check'+i).checked)
 			{
 				document.getElementById('container'+i).className='isChecked';
+				
 			}
 			else
 			{
 				document.getElementById('container'+i).className='isntChecked';
+				document.getElementById('check'+i).className = 'check';
 			}
 		}
 	}
@@ -83,13 +89,11 @@ function active()
 	{
 		if(document.getElementById('check'+i).checked)
 			{
-				document.getElementById('get_task'+i).style.display='none';
-				document.getElementById('check'+i).style.display='none';
+				document.getElementById('container'+i).className='noactiv'
 			}
 		else
 			{
-				document.getElementById('get_task'+i).style.display='block';
-				document.getElementById('check'+i).style.display='block';
+				document.getElementById('container'+i).className='activ'
 			}
 	}
 }
@@ -100,13 +104,11 @@ function completed()
 	{
 		if(!document.getElementById('check'+i).checked)
 			{
-				document.getElementById('get_task'+i).style.display='none';
-				document.getElementById('check'+i).style.display='none';
+				document.getElementById('container'+i).className='noactiv'
 			}
 		else
 			{
-				document.getElementById('get_task'+i).style.display='block';
-				document.getElementById('check'+i).style.display='block';
+				document.getElementById('container'+i).className='activ'
 			}
 		
 	}
@@ -117,8 +119,7 @@ function allTask()
 {
 	for (var i=0;i<valueId;i++)
 	{
-		document.getElementById('get_task'+i).style.display='block';
-		document.getElementById('check'+i).style.display='block';
+		document.getElementById('container'+i).className='activ'
 	}
 }
 
