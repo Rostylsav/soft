@@ -20,6 +20,11 @@ function getTask()
 		
 	var container = document.createElement('div');
 		container.id = 'container'+valueId;
+		container.className="container";
+		
+	var newButton=document.createElement('button');
+		newButton.id='button'+valueId;
+		newButton.className="button";
 	
 	newDiv.appendChild(document.createTextNode(document.getElementById('task').value));
 	
@@ -27,13 +32,23 @@ function getTask()
 	
 	container.appendChild(newCheckbox);
 	container.appendChild(newDiv);
+	container.appendChild(newButton);
 	containerTask.appendChild(container);
 
 	
+	document.getElementById('button'+valueId).addEventListener("click", isRemove,false);
 	document.getElementById('check'+valueId).addEventListener("click", isChecked,false);
 
 	valueId++;
 	addNumberOfTask();
+}
+
+function isRemove(e){
+	if( e.target)
+	{
+		e.target.parentNode.className='noactiv';
+		delNumberOfTask();
+	}
 }
 
 function isChecked(e)
@@ -89,11 +104,11 @@ function active()
 	{
 		if(document.getElementById('check'+i).checked)
 			{
-				document.getElementById('container'+i).className='noactiv'
+				document.getElementById('container'+i).className='noactiv';
 			}
 		else
 			{
-				document.getElementById('container'+i).className='activ'
+				document.getElementById('container'+i).className='activ';
 			}
 	}
 }
