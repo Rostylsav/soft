@@ -1,4 +1,4 @@
-var  arrayTask=[/*{task:'qwer',isCheck:false, idTask:0},{task:'rewq',isCheck:true, idTask:1}*/];
+var  arrayTask=[];
 
 var idForTask=0;
 var numberOfTasks=0;
@@ -59,7 +59,8 @@ function showAllTask()
 {
 	var valueId=0;
 	document.getElementById('myContainer').innerHTML = '';
-	for(var i=0;i<arrayTask.push();i++)
+	
+	for(var i=0;i<arrayTask.length;i++)
 	{
 		showTask(i,valueId);
 		valueId++;
@@ -78,6 +79,7 @@ function ifPressEnter()
 function addTask()
 {
 	arrayTask.push({task:document.getElementById('task').value, isCheck:false, idTask:idForTask});
+	
 	idForTask++;
 	addNumberOfTask();
 }
@@ -85,7 +87,7 @@ function isChecked(e)
 {	
 	if(e.target.checked)
 		{
-			for(var i=0;i<arrayTask.push();i++)
+			for(var i=0;i<arrayTask.length;i++)
 			{
 				if(e.target.id==('check'+arrayTask[i].idTask))
 				{
@@ -97,7 +99,7 @@ function isChecked(e)
 		}
 	else
 		{
-			for(var i=0;i<arrayTask.push();i++)
+			for(var i=0;i<arrayTask.length;i++)
 			{
 				if(e.target.id==('check'+arrayTask[i].idTask))
 				{
@@ -112,7 +114,7 @@ function activeTask()
 {
 	var valueId=0;
 	document.getElementById('myContainer').innerHTML = '';
-	for (var i=0;i<arrayTask.push();i++)
+	for (var i=0;i<arrayTask.length;i++)
 	{
 		if(!arrayTask[i].isCheck)
 		{
@@ -125,7 +127,7 @@ function completedTask()
 {
 	var valueId=0;
 	document.getElementById('myContainer').innerHTML = '';
-	for (var i=0;i<arrayTask.push();i++)
+	for (var i=0;i<arrayTask.length;i++)
 	{
 		if(arrayTask[i].isCheck)
 		{
@@ -135,69 +137,54 @@ function completedTask()
 	}
 }
 function isRemove(e){
-	if( e.target)
+	if(e.target)
 	{
-		for(var i=0;i<arrayTask.push();i++)
+		for(var i=0;i<idForTask;i++)
 			{
-				if(e.target.id==('button'+arrayTask[i].idTask))
+				if(e.target.id==('button'+i))
 				{
 					if(!arrayTask[i].isCheck)
 					{
 						delNumberOfTask();
 					}	
-					arrayTask.splice(i, 1);					
+					arrayTask.splice(i, 1);	
 				}
-			}
-			
-			showAllTask();
+				
+			}	
 	}
+	showAllTask();
 	
 }
-
-/*
-function isRemove(e){
-	if( e.target)
-	{
-		e.target.parentNode.className='noactiv';
-		//delNumberOfTask();
-	}
-}
-
+var  arrayTaskActive=[];
+var numberOfTasksActive;
 function isCheckedAll(e)
 {	
-	var CheckTarget = e.target;
-	if(CheckTarget.checked)
+	
+	if(e.target.checked)
 	{
-		numberOfTask();
-		for(var i=0; i<valueId; i++ )
+		numberOfTasks=0;
+		numberOfAllTask();
+		for(var i=0;i<arrayTask.length;i++)
 		{
-			document.getElementById('container'+i).className='isChecked';
-			document.getElementById('check'+i).className = 'check checkColor';
+			arrayTaskActive[i]=arrayTask[i].isCheck;
+			arrayTask[i].isCheck=true;	
 		}
 	}
 	else
 	{
-		numberOfTaskAll();
-		for(var i=0; i<valueId; i++ )
+		numberOfTasks=numberOfTasksActive;
+		numberOfAllTask();
+		for(var i=0;i<arrayTask.length;i++)
 		{
-			if(document.getElementById('check'+i).checked)
-			{
-				document.getElementById('container'+i).className='isChecked';
-				
-			}
-			else
-			{
-				document.getElementById('container'+i).className='isntChecked';
-				document.getElementById('check'+i).className = 'check';
-			}
+			arrayTask[i].isCheck=arrayTaskActive[i];
 		}
 	}
+	showAllTask();
 }
 
-*/
 function init(){
 	
-	/*document.getElementById('check_all').addEventListener("click", isCheckedAll,false);*/
+	document.getElementById('check_all').addEventListener("click", isCheckedAll,false);
 	numberOfAllTask();
 	showAllTask();
 }
@@ -213,12 +200,14 @@ function addNumberOfTask(){
 	numberOfTasks++;
 	var parent2 = document.getElementById('myContainer2');
 	parent2.innerHTML='Tasks to do: '+numberOfTasks;
+	numberOfTasksActive=numberOfTasks;
 }
 
 function delNumberOfTask(){
 	numberOfTasks--;
 	var parent2 = document.getElementById('myContainer2');
 	parent2.innerHTML='Tasks to do:  '+numberOfTasks;
+	numberOfTasksActive=numberOfTasks;
 }
 
 	

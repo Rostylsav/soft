@@ -81,6 +81,10 @@ body{
 .isChecked{
 	text-decoration :line-through;
 	color:#999;
+	position: relative;
+}
+.isChecked:hover .button{
+	display:block;
 }
 .isntCheck{
 	color:#111;
