@@ -6,20 +6,20 @@
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
 
-	<body onload= "init()">
+	<body onload= "Init()">
 		<div style="margin: 100px auto;width: 550px;">
-			<div id="enter_task">
+			<div id="enter_task"><!-- контейнер для додавання завдань -->
 				<input id="check_all" type="checkbox"/>
-				<input type="text" name="task" id="task" placeholder="What needs to be done?" autofocus="" onkeypress="ifPressEnter()">	
+				<input type="text" name="task" id="task" placeholder="What needs to be done?" autofocus="" onkeypress="IfPressEnter()">	
 			</div>
 			
-			<div id="myContainer"></div>
+			<div id="myContainer"></div><!-- контейнер для відображення кількості завдань а також виконаних завдань, не виконаних завдань, та всіх завдань. -->
 			<div style="background: #666;width: 550px;">
 				<div style="text-align: center;">
 				<div id="myContainer2" ></div>
-					<a href="#" onClick="showAllTask()">All</a>
-					<a href="#" onClick="activeTask()">Active</a>
-					<a href="#" onClick="completedTask()">Completed</a>
+					<a href="#" onClick="ShowAllTasks(array_of_tasks)">All</a>
+					<a href="#" onClick="ActiveTask()">Active</a>
+					<a href="#" onClick="CompletedTask()">Completed</a>
 				</div>
 			</div>
 		</div>

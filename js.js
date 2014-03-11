@@ -1,30 +1,23 @@
-var  arrayTask=[];
+// Масив який зберігає завдання введені користувачем.
+var  array_of_tasks=[];
 
-var idForTask=0;
-var numberOfTasks=0;
+var id_for_task=0;//  Змінна яка відповідає за id завдань
+var number_of_tasks=0; //  Кількість завдань.
 
-function getIsCheck(temp)
-{
-	return arrayTask[temp].isCheck;
-}
-function getTask(  temp)
-{
-	return arrayTask[temp].task;
-}
-
-function showTask(temp,valueId)
+// Функція яка створює  і відображає всі потрібні елементи Html для представлення одного елемента з масиву завдань array_of_tasks.
+function ShowTask(text,isCheck,id)
 {
 	var containerTask = document.getElementById('myContainer');
 		
-		var container = document.createElement('div');
-			container.id = 'container'+valueId;
+		var container = document.createElement('div');// Створення загального контейнера для відображення завдання
+			container.id = 'container'+id;
 	
-		var newCheckbox = document.createElement('input');
-			newCheckbox.id = 'check'+valueId;
+		var newCheckbox = document.createElement('input');// Створення Checkbox для відзначення стану завдання (виконане або не виконане)
+			newCheckbox.id = 'check'+id;
 			newCheckbox.className = 'check';
 			newCheckbox.type='checkbox';
-			newCheckbox.checked=getIsCheck(temp);
-			if(newCheckbox.checked)
+			newCheckbox.checked=isCheck;
+			if(newCheckbox.checked) //  Перевірка чи Checkbox-а Відмічений чи ні. В відповідності присвоювання йому класів стилю.
 			{
 				container.className="isChecked";
 			}
@@ -32,182 +25,195 @@ function showTask(temp,valueId)
 			{
 				container.className="container";
 			}
-
-		var newDiv = document.createElement('div');
-			newDiv.id = 'get_task'+valueId;
+			newCheckbox.addEventListener("click", IsChecked,false); //  Додавання Checkbox-у події з викликом функції IsChecked().
+			
+		var newDiv = document.createElement('div'); // Створення контейнера для відображення тексту завдання
+			newDiv.id = 'get_task'+id;
 			newDiv.className = 'get_task';
 
-		var newButton=document.createElement('button');
-			newButton.id='button'+valueId;
+		var newButton=document.createElement('button'); // Створення кнопки для видалення завдання
+			newButton.id='button'+id;
 			newButton.className="button";
+			newButton.addEventListener("click", Remove,false); //  Додавання події з викликом функції Remove().
 		
-		newDiv.appendChild(document.createTextNode(getTask(temp)));
+		newDiv.appendChild(document.createTextNode(text));
+		document.getElementById('task').value=''; 
 		
-		document.getElementById('task').value='';
-		
-		container.appendChild(newCheckbox);
+		container.appendChild(newCheckbox); //  Виведення даних
 		container.appendChild(newDiv);
 		container.appendChild(newButton);
 		containerTask.appendChild(container);
-
-		
-		document.getElementById('button'+valueId).addEventListener("click", isRemove,false);
-		document.getElementById('check'+valueId).addEventListener("click", isChecked,false);
-
 }
-function showAllTask()
+
+// Функція відображає всі завдання з масиву array_of_tasks.
+function ShowAllTasks(arr)
 {
-	var valueId=0;
-	document.getElementById('myContainer').innerHTML = '';
+	document.getElementById('myContainer').innerHTML = '';  //  Очистка контейнера виведення завдань.
 	
-	for(var i=0;i<arrayTask.length;i++)
+	for(var i=0;i<arr.length;i++)
 	{
-		showTask(i,valueId);
-		valueId++;
-	}
-	
-}
-function ifPressEnter()
-{
-	if (event.keyCode == 13)
-	{
-		addTask();
-		showAllTask();
+		ShowTask(arr[i].task,arr[i].isCheck,arr[i].id);  //  Виведення конкретного завдання.
 	}
 }
 
-function addTask()
+// Функція яка додає завдання в масив завдань array_of_tasks при натисканні кнопки Enter.
+function IfPressEnter()
 {
-	arrayTask.push({task:document.getElementById('task').value, isCheck:false, idTask:idForTask});
-	
-	idForTask++;
-	addNumberOfTask();
+	if (event.keyCode == 13)  //  Перевірка чи натиснути кнопка Enter.
+	{
+		AddTask();  //  Додавання завдання в масив завдань.
+		ShowAllTasks(array_of_tasks); //  Виведення всіх завдань.
+	}
 }
-function isChecked(e)
+
+// Функція додає завдання до масиву завдань array_of_tasks.
+function AddTask()
+{
+	array_of_tasks.push({task:document.getElementById('task').value, isCheck:false, id:id_for_task});
+	id_for_task++;
+	AddNumberOfTask();
+}
+
+// Функція перевіряє чи завдання відмічене як виконане.
+function IsChecked(e)
 {	
 	if(e.target.checked)
 		{
-			for(var i=0;i<arrayTask.length;i++)
+			for(var i=0;i<array_of_tasks.length;i++)
 			{
-				if(e.target.id==('check'+arrayTask[i].idTask))
+				if(e.target.id==('check'+array_of_tasks[i].id))
 				{
-					arrayTask[i].isCheck=true;
+					array_of_tasks[i].isCheck=true;
 				}
 				
 			}
-			delNumberOfTask();
+			DelNumberOfTask();
 		}
 	else
 		{
-			for(var i=0;i<arrayTask.length;i++)
+			for(var i=0;i<array_of_tasks.length;i++)
 			{
-				if(e.target.id==('check'+arrayTask[i].idTask))
+				if(e.target.id==('check'+array_of_tasks[i].id))
 				{
-					arrayTask[i].isCheck=false;
+					array_of_tasks[i].isCheck=false;
 				}
 			}
-			addNumberOfTask();
+			AddNumberOfTask();
 		}	
-	showAllTask();
+	ShowAllTasks(array_of_tasks);
 }
-function activeTask()
+
+// Функція відображає завдання які були не відмічені як виконані.
+function ActiveTask()
 {
-	var valueId=0;
-	document.getElementById('myContainer').innerHTML = '';
-	for (var i=0;i<arrayTask.length;i++)
+	var  arrayActiveTask=[];//  Тимчасовий масив для збереження активних завдань.
+	var j=0; 
+	for (var i=0;i<array_of_tasks.length;i++)
 	{
-		if(!arrayTask[i].isCheck)
+		if(!array_of_tasks[i].isCheck)
 		{
-			showTask(i,valueId);
-			valueId++;
+			arrayActiveTask[j]=array_of_tasks[i];
+			j++;
 		}
 	}
+	ShowAllTasks(arrayActiveTask); //  Відображення списку активних завдань.
 }
-function completedTask()
+
+// Функція відображає завдання які були відмічені як виконані.
+function CompletedTask()
 {
-	var valueId=0;
-	document.getElementById('myContainer').innerHTML = '';
-	for (var i=0;i<arrayTask.length;i++)
+	var  arrayCompletedTask=[];//  Тимчасовий масив для збереження не активних завдань.
+	var j=0;
+	for (var i=0;i<array_of_tasks.length;i++)
 	{
-		if(arrayTask[i].isCheck)
+		if(array_of_tasks[i].isCheck)
 		{
-			showTask(i,valueId);
-			valueId++;
+			arrayCompletedTask[j]=array_of_tasks[i];
+			j++;
 		}
 	}
+	ShowAllTasks(arrayCompletedTask);//  Відображення списку не активних завдань.
 }
-function isRemove(e){
+
+// Функція видаляє вибране завдання з масиву завдань.
+function Remove(e){
 	if(e.target)
 	{
-		for(var i=0;i<idForTask;i++)
+		for(var i=0;i<id_for_task;i++)
 			{
-				if(e.target.id==('button'+i))
+				if(e.target.id==('button'+i))//  Перевірка яка кнопка була натиснута.
 				{
-					if(!arrayTask[i].isCheck)
+					if(!array_of_tasks[i].isCheck)
 					{
-						delNumberOfTask();
+						DelNumberOfTask();
 					}	
-					arrayTask.splice(i, 1);	
+					array_of_tasks.splice(i, 1);	// Видалення елемента з масиву завдань.
 				}
 				
 			}	
 	}
-	showAllTask();
-	
+	ShowAllTasks(array_of_tasks);//  Відображення  завдань.
 }
-var  arrayTaskActive=[];
-var numberOfTasksActive;
-function isCheckedAll(e)
+
+var number_of_tasksActive;
+
+// Функція відмічає всі завдання як виконані
+function IsCheckedAll(e)
 {	
-	
+	var  array_of_tasksActive=[];
 	if(e.target.checked)
 	{
-		numberOfTasks=0;
-		numberOfAllTask();
-		for(var i=0;i<arrayTask.length;i++)
+		number_of_tasks=0;
+		NumberOfAllTask();
+		for(var i=0;i<array_of_tasks.length;i++)
 		{
-			arrayTaskActive[i]=arrayTask[i].isCheck;
-			arrayTask[i].isCheck=true;	
+			array_of_tasksActive[i]=array_of_tasks[i];
+			array_of_tasks[i].isCheck=true;	
 		}
+		ShowAllTasks(array_of_tasks);
 	}
-	else
+	if(e.target.checked==false)
 	{
-		numberOfTasks=numberOfTasksActive;
-		numberOfAllTask();
-		for(var i=0;i<arrayTask.length;i++)
+		alert('work');
+		number_of_tasks=number_of_tasksActive;
+		NumberOfAllTask();
+		for(var i=0; i<array_of_tasks.length;i++)
 		{
-			arrayTask[i].isCheck=arrayTaskActive[i];
+			array_of_tasks[i]=array_of_tasksActive[i];	
+			alert('array_of_tasks[i].isCheck=  '+array_of_tasks[i].isCheck);
 		}
+		ShowAllTasks(array_of_tasks);
 	}
-	showAllTask();
-}
-
-function init(){
 	
-	document.getElementById('check_all').addEventListener("click", isCheckedAll,false);
-	numberOfAllTask();
-	showAllTask();
 }
 
+// Функція яка виконується після загрузки Html сторінки.
+function Init()
+{
+	document.getElementById('check_all').addEventListener("click", IsCheckedAll,false);
+	NumberOfAllTask();
+	ShowAllTasks(array_of_tasks);
+}
 
-function numberOfAllTask(){
+// Функція відображає кількість всіх завдань.
+function NumberOfAllTask(){
 	
 	var parent2 = document.getElementById('myContainer2');
-	parent2.innerHTML='Tasks to do: '+numberOfTasks;
+	parent2.innerHTML='Tasks to do: '+number_of_tasks;
 } 
 
-function addNumberOfTask(){
-	numberOfTasks++;
-	var parent2 = document.getElementById('myContainer2');
-	parent2.innerHTML='Tasks to do: '+numberOfTasks;
-	numberOfTasksActive=numberOfTasks;
+// Функція збільшує кількість завдань.
+function AddNumberOfTask(){
+	number_of_tasks++;
+	NumberOfAllTask();
+	number_of_tasksActive=number_of_tasks;
 }
 
-function delNumberOfTask(){
-	numberOfTasks--;
-	var parent2 = document.getElementById('myContainer2');
-	parent2.innerHTML='Tasks to do:  '+numberOfTasks;
-	numberOfTasksActive=numberOfTasks;
+// Функція зменшує кількість завдань.
+function DelNumberOfTask(){
+	number_of_tasks--;
+	NumberOfAllTask();
+	number_of_tasksActive=number_of_tasks;
 }
 
 	

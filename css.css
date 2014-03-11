@@ -4,91 +4,9 @@ body{
 	padding:0px;
 	width: 100%;
 }
-
 #enter_task{
 	background:#E0FFFF;
 	width: 550px;
-}
-.container{
-	position: relative;
-}
-.container:hover .button{
-	display:block;
-}
-.button{
-	display:none;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	background: none;
-	-webkit-appearance: none;
-	outline: none;
-	border: 0px;
-	font-size: 30px;
-}
-.button:after {
-	content: '®';
-}
-.button:hover {
-	color:#ff0000;
-}
-.check{
-	float:left;
-	margin-top: 15px;
-	height: 41px;
-	-webkit-transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	transform: rotate(90deg);
-	-webkit-appearance: none;
-	appearance: none;
-	text-decoration:none;
-	color: #d9d9d9;
-}
-.check:before{
-	content: '+';
-	font-size: 28px;
-	
-	padding: 0 25px 7px;
-}
-.check:checked:before {
-	color: #FF0000;
-}
-.checkColor{
-	color: #FF0000;
-}
-.checkCheckbox{
-	color: #FF0000;
-}
-
-.get_task{
-	background :#FFFAFA; 
-	font-size: 24px;
-	width: 520px;
-	font-family: inherit;
-	line-height: 1.4em;
-	padding:15px;
-	color:#111;
-	border: none;
-	margin-top:2px;
-}
-.activ{
-	display:block;
-}
-.noactiv{
-	display:none;
-}
-
-.isChecked{
-	text-decoration :line-through;
-	color:#999;
-	position: relative;
-}
-.isChecked:hover .button{
-	display:block;
-}
-.isntCheck{
-	color:#111;
-	text-decoration:none;
 }
 #task{
 	background: none;
@@ -101,7 +19,6 @@ body{
 	border: none;
 	margin-top:2px;
 }
-
 input[type="checkbox"],input[type="text"] {
 	outline: none;
 }
@@ -124,7 +41,6 @@ input[type="checkbox"],input[type="text"] {
 #check_all:checked:before {
 	color: #FF0000;
 }
-
 a{
 	text-decoration: none;
 	color: #999;
@@ -135,15 +51,91 @@ a{
 a.active{
 	color: #222;
 }
-
-
-
-
 #myContainer2{
 	float: left;
-padding-left: 20px;
+	padding-left: 20px;
 }
-/*
-#check:checked ~ #get_task {
-  text-decoration: line-through;
-}*/
+
+.container{
+	position: relative;
+}
+.container:hover .button{
+	display:block;
+}
+.check{
+	float:left;
+	margin-top: 15px;
+	height: 41px;
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-appearance: none;
+	appearance: none;
+	text-decoration:none;
+	color: #d9d9d9;
+}
+.check:before{
+	content: '+';
+	font-size: 28px;
+	padding: 0 25px 7px;
+}
+.check:checked:before {
+	color: #FF0000;
+}
+.checkColor{
+	color: #FF0000;
+}
+.checkCheckbox{
+	color: #FF0000;
+}
+
+.button{
+	display:none;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	background: none;
+	-webkit-appearance: none;
+	outline: none;
+	border: 0px;
+	font-size: 30px;
+}
+.button:after {
+	content: '®';
+}
+.button:hover {
+	color:#ff0000;
+}
+
+.get_task{
+	background :#FFFAFA; 
+	font-size: 24px;
+	width: 520px;
+	font-family: inherit;
+	line-height: 1.4em;
+	padding:15px;
+	color:#111;
+	border: none;
+	margin-top:2px;
+}
+
+.activ{
+	display:block;
+}
+.noactiv{
+	display:none;
+}
+
+.isChecked{
+	text-decoration :line-through;
+	color:#999;
+	position: relative;
+}
+.isChecked:hover .button{
+	display:block;
+}
+.isntCheck{
+	color:#111;
+	text-decoration:none;
+}
+
