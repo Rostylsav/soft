@@ -1,23 +1,23 @@
-// Масив який зберігає завдання введені користувачем.
+// РњР°СЃРёРІ СЏРєРёР№ Р·Р±РµСЂС–РіР°С” Р·Р°РІРґР°РЅРЅСЏ РІРІРµРґРµРЅС– РєРѕСЂРёСЃС‚СѓРІР°С‡РµРј.
 var  array_of_tasks=[];
 
-var id_for_task=0;//  Змінна яка відповідає за id завдань
-var number_of_tasks=0; //  Кількість завдань.
+var id_for_task=0;//  Р—РјС–РЅРЅР° СЏРєР° РІС–РґРїРѕРІС–РґР°С” Р·Р° id Р·Р°РІРґР°РЅСЊ
+var number_of_tasks=0; //  РљС–Р»СЊРєС–СЃС‚СЊ Р·Р°РІРґР°РЅСЊ.
 
-// Функція яка створює  і відображає всі потрібні елементи Html для представлення одного елемента з масиву завдань array_of_tasks.
+// Р¤СѓРЅРєС†С–СЏ СЏРєР° СЃС‚РІРѕСЂСЋС”  С– РІС–РґРѕР±СЂР°Р¶Р°С” РІСЃС– РїРѕС‚СЂС–Р±РЅС– РµР»РµРјРµРЅС‚Рё Html РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ РѕРґРЅРѕРіРѕ РµР»РµРјРµРЅС‚Р° Р· РјР°СЃРёРІСѓ Р·Р°РІРґР°РЅСЊ array_of_tasks.
 function ShowTask(text,isCheck,id)
 {
 	var containerTask = document.getElementById('myContainer');
 		
-		var container = document.createElement('div');// Створення загального контейнера для відображення завдання
+		var container = document.createElement('div');// РЎС‚РІРѕСЂРµРЅРЅСЏ Р·Р°РіР°Р»СЊРЅРѕРіРѕ РєРѕРЅС‚РµР№РЅРµСЂР° РґР»СЏ РІС–РґРѕР±СЂР°Р¶РµРЅРЅСЏ Р·Р°РІРґР°РЅРЅСЏ
 			container.id = 'container'+id;
 	
-		var newCheckbox = document.createElement('input');// Створення Checkbox для відзначення стану завдання (виконане або не виконане)
+		var newCheckbox = document.createElement('input');// РЎС‚РІРѕСЂРµРЅРЅСЏ Checkbox РґР»СЏ РІС–РґР·РЅР°С‡РµРЅРЅСЏ СЃС‚Р°РЅСѓ Р·Р°РІРґР°РЅРЅСЏ (РІРёРєРѕРЅР°РЅРµ Р°Р±Рѕ РЅРµ РІРёРєРѕРЅР°РЅРµ)
 			newCheckbox.id = 'check'+id;
 			newCheckbox.className = 'check';
 			newCheckbox.type='checkbox';
 			newCheckbox.checked=isCheck;
-			if(newCheckbox.checked) //  Перевірка чи Checkbox-а Відмічений чи ні. В відповідності присвоювання йому класів стилю.
+			if(newCheckbox.checked) //  РџРµСЂРµРІС–СЂРєР° С‡Рё Checkbox-Р° Р’С–РґРјС–С‡РµРЅРёР№ С‡Рё РЅС–. Р’ РІС–РґРїРѕРІС–РґРЅРѕСЃС‚С– РїСЂРёСЃРІРѕСЋРІР°РЅРЅСЏ Р№РѕРјСѓ РєР»Р°СЃС–РІ СЃС‚РёР»СЋ.
 			{
 				container.className="isChecked";
 			}
@@ -25,48 +25,48 @@ function ShowTask(text,isCheck,id)
 			{
 				container.className="container";
 			}
-			newCheckbox.addEventListener("click", IsChecked,false); //  Додавання Checkbox-у події з викликом функції IsChecked().
+			newCheckbox.addEventListener("click", IsChecked,false); //  Р”РѕРґР°РІР°РЅРЅСЏ Checkbox-Сѓ РїРѕРґС–С— Р· РІРёРєР»РёРєРѕРј С„СѓРЅРєС†С–С— IsChecked().
 			
-		var newDiv = document.createElement('div'); // Створення контейнера для відображення тексту завдання
+		var newDiv = document.createElement('div'); // РЎС‚РІРѕСЂРµРЅРЅСЏ РєРѕРЅС‚РµР№РЅРµСЂР° РґР»СЏ РІС–РґРѕР±СЂР°Р¶РµРЅРЅСЏ С‚РµРєСЃС‚Сѓ Р·Р°РІРґР°РЅРЅСЏ
 			newDiv.id = 'get_task'+id;
 			newDiv.className = 'get_task';
 
-		var newButton=document.createElement('button'); // Створення кнопки для видалення завдання
+		var newButton=document.createElement('button'); // РЎС‚РІРѕСЂРµРЅРЅСЏ РєРЅРѕРїРєРё РґР»СЏ РІРёРґР°Р»РµРЅРЅСЏ Р·Р°РІРґР°РЅРЅСЏ
 			newButton.id='button'+id;
 			newButton.className="button";
-			newButton.addEventListener("click", Remove,false); //  Додавання події з викликом функції Remove().
+			newButton.addEventListener("click", Remove,false); //  Р”РѕРґР°РІР°РЅРЅСЏ РїРѕРґС–С— Р· РІРёРєР»РёРєРѕРј С„СѓРЅРєС†С–С— Remove().
 		
 		newDiv.appendChild(document.createTextNode(text));
 		document.getElementById('task').value=''; 
 		
-		container.appendChild(newCheckbox); //  Виведення даних
+		container.appendChild(newCheckbox); //  Р’РёРІРµРґРµРЅРЅСЏ РґР°РЅРёС…
 		container.appendChild(newDiv);
 		container.appendChild(newButton);
 		containerTask.appendChild(container);
 }
 
-// Функція відображає всі завдання з масиву array_of_tasks.
+// Р¤СѓРЅРєС†С–СЏ РІС–РґРѕР±СЂР°Р¶Р°С” РІСЃС– Р·Р°РІРґР°РЅРЅСЏ Р· РјР°СЃРёРІСѓ array_of_tasks.
 function ShowAllTasks(arr)
 {
-	document.getElementById('myContainer').innerHTML = '';  //  Очистка контейнера виведення завдань.
+	document.getElementById('myContainer').innerHTML = '';  //  РћС‡РёСЃС‚РєР° РєРѕРЅС‚РµР№РЅРµСЂР° РІРёРІРµРґРµРЅРЅСЏ Р·Р°РІРґР°РЅСЊ.
 	
 	for(var i=0;i<arr.length;i++)
 	{
-		ShowTask(arr[i].task,arr[i].isCheck,arr[i].id);  //  Виведення конкретного завдання.
+		ShowTask(arr[i].task,arr[i].isCheck,arr[i].id);  //  Р’РёРІРµРґРµРЅРЅСЏ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ Р·Р°РІРґР°РЅРЅСЏ.
 	}
 }
 
-// Функція яка додає завдання в масив завдань array_of_tasks при натисканні кнопки Enter.
+// Р¤СѓРЅРєС†С–СЏ СЏРєР° РґРѕРґР°С” Р·Р°РІРґР°РЅРЅСЏ РІ РјР°СЃРёРІ Р·Р°РІРґР°РЅСЊ array_of_tasks РїСЂРё РЅР°С‚РёСЃРєР°РЅРЅС– РєРЅРѕРїРєРё Enter.
 function IfPressEnter()
 {
-	if (event.keyCode == 13)  //  Перевірка чи натиснути кнопка Enter.
+	if (event.keyCode == 13)  //  РџРµСЂРµРІС–СЂРєР° С‡Рё РЅР°С‚РёСЃРЅСѓС‚Рё РєРЅРѕРїРєР° Enter.
 	{
-		AddTask();  //  Додавання завдання в масив завдань.
-		ShowAllTasks(array_of_tasks); //  Виведення всіх завдань.
+		AddTask();  //  Р”РѕРґР°РІР°РЅРЅСЏ Р·Р°РІРґР°РЅРЅСЏ РІ РјР°СЃРёРІ Р·Р°РІРґР°РЅСЊ.
+		ShowAllTasks(array_of_tasks); //  Р’РёРІРµРґРµРЅРЅСЏ РІСЃС–С… Р·Р°РІРґР°РЅСЊ.
 	}
 }
 
-// Функція додає завдання до масиву завдань array_of_tasks.
+// Р¤СѓРЅРєС†С–СЏ РґРѕРґР°С” Р·Р°РІРґР°РЅРЅСЏ РґРѕ РјР°СЃРёРІСѓ Р·Р°РІРґР°РЅСЊ array_of_tasks.
 function AddTask()
 {
 	array_of_tasks.push({task:document.getElementById('task').value, isCheck:false, id:id_for_task});
@@ -74,7 +74,7 @@ function AddTask()
 	AddNumberOfTask();
 }
 
-// Функція перевіряє чи завдання відмічене як виконане.
+// Р¤СѓРЅРєС†С–СЏ РїРµСЂРµРІС–СЂСЏС” С‡Рё Р·Р°РІРґР°РЅРЅСЏ РІС–РґРјС–С‡РµРЅРµ СЏРє РІРёРєРѕРЅР°РЅРµ.
 function IsChecked(e)
 {	
 	if(e.target.checked)
@@ -103,10 +103,10 @@ function IsChecked(e)
 	ShowAllTasks(array_of_tasks);
 }
 
-// Функція відображає завдання які були не відмічені як виконані.
+// Р¤СѓРЅРєС†С–СЏ РІС–РґРѕР±СЂР°Р¶Р°С” Р·Р°РІРґР°РЅРЅСЏ СЏРєС– Р±СѓР»Рё РЅРµ РІС–РґРјС–С‡РµРЅС– СЏРє РІРёРєРѕРЅР°РЅС–.
 function ActiveTask()
 {
-	var  arrayActiveTask=[];//  Тимчасовий масив для збереження активних завдань.
+	var  arrayActiveTask=[];//  РўРёРјС‡Р°СЃРѕРІРёР№ РјР°СЃРёРІ РґР»СЏ Р·Р±РµСЂРµР¶РµРЅРЅСЏ Р°РєС‚РёРІРЅРёС… Р·Р°РІРґР°РЅСЊ.
 	var j=0; 
 	for (var i=0;i<array_of_tasks.length;i++)
 	{
@@ -116,13 +116,13 @@ function ActiveTask()
 			j++;
 		}
 	}
-	ShowAllTasks(arrayActiveTask); //  Відображення списку активних завдань.
+	ShowAllTasks(arrayActiveTask); //  Р’С–РґРѕР±СЂР°Р¶РµРЅРЅСЏ СЃРїРёСЃРєСѓ Р°РєС‚РёРІРЅРёС… Р·Р°РІРґР°РЅСЊ.
 }
 
-// Функція відображає завдання які були відмічені як виконані.
+// Р¤СѓРЅРєС†С–СЏ РІС–РґРѕР±СЂР°Р¶Р°С” Р·Р°РІРґР°РЅРЅСЏ СЏРєС– Р±СѓР»Рё РІС–РґРјС–С‡РµРЅС– СЏРє РІРёРєРѕРЅР°РЅС–.
 function CompletedTask()
 {
-	var  arrayCompletedTask=[];//  Тимчасовий масив для збереження не активних завдань.
+	var  arrayCompletedTask=[];//  РўРёРјС‡Р°СЃРѕРІРёР№ РјР°СЃРёРІ РґР»СЏ Р·Р±РµСЂРµР¶РµРЅРЅСЏ РЅРµ Р°РєС‚РёРІРЅРёС… Р·Р°РІРґР°РЅСЊ.
 	var j=0;
 	for (var i=0;i<array_of_tasks.length;i++)
 	{
@@ -132,62 +132,63 @@ function CompletedTask()
 			j++;
 		}
 	}
-	ShowAllTasks(arrayCompletedTask);//  Відображення списку не активних завдань.
+	ShowAllTasks(arrayCompletedTask);//  Р’С–РґРѕР±СЂР°Р¶РµРЅРЅСЏ СЃРїРёСЃРєСѓ РЅРµ Р°РєС‚РёРІРЅРёС… Р·Р°РІРґР°РЅСЊ.
 }
 
-// Функція видаляє вибране завдання з масиву завдань.
-function Remove(e){
+// Р¤СѓРЅРєС†С–СЏ РІРёРґР°Р»СЏС” РІРёР±СЂР°РЅРµ Р·Р°РІРґР°РЅРЅСЏ Р· РјР°СЃРёРІСѓ Р·Р°РІРґР°РЅСЊ.
+function Remove(e)
+{
 	if(e.target)
 	{
+		alert('id_for_task= '+id_for_task);
 		for(var i=0;i<id_for_task;i++)
+		{
+			alert('i= '+i);
+			if(e.target.id==('button'+i))//  РџРµСЂРµРІС–СЂРєР° СЏРєР° РєРЅРѕРїРєР° Р±СѓР»Р° РЅР°С‚РёСЃРЅСѓС‚Р°.
 			{
-				if(e.target.id==('button'+i))//  Перевірка яка кнопка була натиснута.
+				alert('e.target.id= '+e.target.id);
+				alert('button+i= '+'button'+i);
+				if(!array_of_tasks[i].isCheck)
 				{
-					if(!array_of_tasks[i].isCheck)
-					{
-						DelNumberOfTask();
-					}	
-					array_of_tasks.splice(i, 1);	// Видалення елемента з масиву завдань.
-				}
-				
+					DelNumberOfTask();
+				}	
+				array_of_tasks.splice(i, 1);	// Р’РёРґР°Р»РµРЅРЅСЏ РµР»РµРјРµРЅС‚Р° Р· РјР°СЃРёРІСѓ Р·Р°РІРґР°РЅСЊ.
 			}	
+		}
 	}
-	ShowAllTasks(array_of_tasks);//  Відображення  завдань.
+	ShowAllTasks(array_of_tasks);//  Р’С–РґРѕР±СЂР°Р¶РµРЅРЅСЏ  Р·Р°РІРґР°РЅСЊ.
 }
-
-var number_of_tasksActive;
-
-// Функція відмічає всі завдання як виконані
+var num_of_task=0;
+// Р¤СѓРЅРєС†С–СЏ РІС–РґРјС–С‡Р°С” РІСЃС– Р·Р°РІРґР°РЅРЅСЏ СЏРє РІРёРєРѕРЅР°РЅС–
 function IsCheckedAll(e)
 {	
-	var  array_of_tasksActive=[];
+	
 	if(e.target.checked)
 	{
 		number_of_tasks=0;
 		NumberOfAllTask();
 		for(var i=0;i<array_of_tasks.length;i++)
 		{
-			array_of_tasksActive[i]=array_of_tasks[i];
 			array_of_tasks[i].isCheck=true;	
+			num_of_task=i;
 		}
 		ShowAllTasks(array_of_tasks);
+		
+		
 	}
-	if(e.target.checked==false)
+	if(!e.target.checked)
 	{
-		alert('work');
-		number_of_tasks=number_of_tasksActive;
+		number_of_tasks=num_of_task+1;
 		NumberOfAllTask();
 		for(var i=0; i<array_of_tasks.length;i++)
 		{
-			array_of_tasks[i]=array_of_tasksActive[i];	
-			alert('array_of_tasks[i].isCheck=  '+array_of_tasks[i].isCheck);
+			array_of_tasks[i].isCheck=false;	
 		}
 		ShowAllTasks(array_of_tasks);
 	}
-	
 }
 
-// Функція яка виконується після загрузки Html сторінки.
+// Р¤СѓРЅРєС†С–СЏ СЏРєР° РІРёРєРѕРЅСѓС”С‚СЊСЃСЏ РїС–СЃР»СЏ Р·Р°РіСЂСѓР·РєРё Html СЃС‚РѕСЂС–РЅРєРё.
 function Init()
 {
 	document.getElementById('check_all').addEventListener("click", IsCheckedAll,false);
@@ -195,25 +196,23 @@ function Init()
 	ShowAllTasks(array_of_tasks);
 }
 
-// Функція відображає кількість всіх завдань.
+// Р¤СѓРЅРєС†С–СЏ РІС–РґРѕР±СЂР°Р¶Р°С” РєС–Р»СЊРєС–СЃС‚СЊ РІСЃС–С… Р·Р°РІРґР°РЅСЊ.
 function NumberOfAllTask(){
 	
 	var parent2 = document.getElementById('myContainer2');
 	parent2.innerHTML='Tasks to do: '+number_of_tasks;
 } 
 
-// Функція збільшує кількість завдань.
+// Р¤СѓРЅРєС†С–СЏ Р·Р±С–Р»СЊС€СѓС” РєС–Р»СЊРєС–СЃС‚СЊ Р·Р°РІРґР°РЅСЊ.
 function AddNumberOfTask(){
 	number_of_tasks++;
 	NumberOfAllTask();
-	number_of_tasksActive=number_of_tasks;
 }
 
-// Функція зменшує кількість завдань.
+// Р¤СѓРЅРєС†С–СЏ Р·РјРµРЅС€СѓС” РєС–Р»СЊРєС–СЃС‚СЊ Р·Р°РІРґР°РЅСЊ.
 function DelNumberOfTask(){
 	number_of_tasks--;
 	NumberOfAllTask();
-	number_of_tasksActive=number_of_tasks;
 }
 
 	
