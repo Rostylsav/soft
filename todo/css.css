@@ -24,8 +24,7 @@ input[type="checkbox"],input[type="text"] {
 }
 #check_all{
 	float:left;
-	height: 41px;
-	margin-top: 13px;
+	width: 60px;
 	-webkit-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	transform: rotate(90deg);
@@ -33,7 +32,7 @@ input[type="checkbox"],input[type="text"] {
 	appearance: none;
 }
 #check_all:before{
-	content: '»';
+	content: '>>';
 	font-size: 28px;
 	color: #d9d9d9;
 	padding: 0 25px 7px;
@@ -101,7 +100,7 @@ a.active{
 	font-size: 30px;
 }
 .button:after {
-	content: '®';
+	content: 'R';
 }
 .button:hover {
 	color:#ff0000;

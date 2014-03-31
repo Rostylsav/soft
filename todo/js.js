@@ -1,7 +1,8 @@
 // Масив який зберігає завдання введені користувачем.
 var  array_of_tasks=[];
 
-var id_for_task=0;//  Змінна яка відповідає за id завдань
+var id_for_task=0;//  Змінна яка відповідає за id знаяення
+
 var number_of_tasks=0; //  Кількість завдань.
 
 // Функція яка створює  і відображає всі потрібні елементи Html для представлення одного елемента з масиву завдань array_of_tasks.
@@ -17,6 +18,7 @@ function ShowTask(text,isCheck,id)
 			newCheckbox.className = 'check';
 			newCheckbox.type='checkbox';
 			newCheckbox.checked=isCheck;
+			newCheckbox.setAttribute('data-id',id);
 			if(newCheckbox.checked) //  Перевірка чи Checkbox-а Відмічений чи ні. В відповідності присвоювання йому класів стилю.
 			{
 				container.className="isChecked";
@@ -34,6 +36,7 @@ function ShowTask(text,isCheck,id)
 		var newButton=document.createElement('button'); // Створення кнопки для видалення завдання
 			newButton.id='button'+id;
 			newButton.className="button";
+			newButton.setAttribute('data-id',id);
 			newButton.addEventListener("click", Remove,false); //  Додавання події з викликом функції Remove().
 		
 		newDiv.appendChild(document.createTextNode(text));
@@ -72,6 +75,21 @@ function AddTask()
 	array_of_tasks.push({task:document.getElementById('task').value, isCheck:false, id:id_for_task});
 	id_for_task++;
 	AddNumberOfTask();
+}
+
+function getElementById(temp)
+{
+	for(var i=0;i<array_of_tasks.length;i++)
+	{
+		if(temp==array_of_tasks[i].id)
+		{
+			return array_of_tasks[i];
+		}
+		else
+		{
+			alert('немає такого елемента');
+		}
+	}
 }
 
 // Функція перевіряє чи завдання відмічене як виконане.
@@ -140,14 +158,13 @@ function Remove(e)
 {
 	if(e.target)
 	{
-		alert('id_for_task= '+id_for_task);
-		for(var i=0;i<id_for_task;i++)
+		var data_id=e.target.getAttribute("data-id");
+		alert(data_id);
+		alert(getElementById(data_id));
+		for(var i=0;i<array_of_tasks.length;i++)
 		{
-			alert('i= '+i);
-			if(e.target.id==('button'+i))//  Перевірка яка кнопка була натиснута.
+			if(data_id==array_of_tasks[i].id)//  Перевірка яка кнопка була натиснута.
 			{
-				alert('e.target.id= '+e.target.id);
-				alert('button+i= '+'button'+i);
 				if(!array_of_tasks[i].isCheck)
 				{
 					DelNumberOfTask();
