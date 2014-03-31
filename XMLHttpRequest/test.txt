@@ -1,13 +1,5 @@
-<html>
-<head>
-<title>Requested HTML file</title>
-</head>
-<body>
-
-<h3>File Requested_file.htm</h3>
-
-This file is requested from JavaScript code 
-in another HTML page using XMLHttpRequest.
-
-</body>
-</html>
+Borys,44,sambir
+Rostyk,23,lviv
+Oksana,53,Odesa
+Volodya,38,Ryga
+Igor,26,Lviv
